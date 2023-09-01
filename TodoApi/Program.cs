@@ -3,7 +3,19 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TodoDb>(opt => opt.UseInMemoryDatabase("TodoList"));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "PizzaStore API V1");
+    c.RoutePrefix = string.Empty;
+    });
+}
 
 RouteGroupBuilder todoItems = app.MapGroup("/todoitems");
 
