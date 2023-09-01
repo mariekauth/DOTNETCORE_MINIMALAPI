@@ -42,6 +42,18 @@ const Pizza = ({ pizza }) => {
    function onSave() {
      setDirty(false);
      // make rest call
+     console.log('Saving', pizza);
+     console.log('Data', data);
+     fetch(`/pizza/${pizza.id}`,
+     {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+         'Content-type': 'application/json; charset=UTF-8',
+      }
+     })
+     .then(res => res.ok === true ? UpdatePizzas(pizza, data) : console.log('res: ', res))
+     .catch(e => console.log(e))
    }
 
    return (<React.Fragment>
@@ -57,6 +69,10 @@ const Pizza = ({ pizza }) => {
      }
      </PizzaFrame>
    </React.Fragment>);
+}
+
+const UpdatePizzas = (pizza, data) => {
+  // This is where we need to start separating out into effects and services
 }
 
 const Main = () => {
