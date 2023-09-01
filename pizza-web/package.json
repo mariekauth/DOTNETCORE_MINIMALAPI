@@ -39,5 +39,8 @@
   "resolutions": {
     "styled-components": "^5"
   },
-  "proxy": "http://localhost:5251"
+  "proxy": "http://localhost:5251",
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  }
 }
