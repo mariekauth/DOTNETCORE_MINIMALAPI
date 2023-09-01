@@ -31,11 +31,13 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
    c.SwaggerEndpoint("/swagger/v1/swagger.json", "PizzaStore API V1");
+   c.RoutePrefix = string.Empty;
 });
+
+app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
 
-app.MapGet("/", () => "Hello World!");
 app.MapGet("/pizza/{id}", async (PizzaDb db, int id) => await db.Pizzas.FindAsync(id));
 app.MapGet("/pizzas", async (PizzaDb db) => await db.Pizzas.ToListAsync());
 app.MapPost("/pizza", async (PizzaDb db, Pizza pizza) =>
