@@ -41,9 +41,6 @@ const Pizza = ({ pizza }) => {
 
    function onSave() {
      setDirty(false);
-     // make rest call
-     console.log('Saving', pizza);
-     console.log('Data', data);
      fetch(`/pizza/${pizza.id}`,
      {
       method: 'PUT',
@@ -52,8 +49,8 @@ const Pizza = ({ pizza }) => {
          'Content-type': 'application/json; charset=UTF-8',
       }
      })
-     .then(res => res.ok === true ? UpdatePizzas(pizza, data) : console.log('res: ', res))
-     .catch(e => console.log(e))
+     .then(res => res.ok === true ? UpdatePizzas(pizza, data) : { /* handle error */ })
+     .catch(e => {/* handle error */})
    }
 
    return (<React.Fragment>
